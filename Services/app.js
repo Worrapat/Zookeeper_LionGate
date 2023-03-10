@@ -17,8 +17,10 @@ app.use(cors(corsOptions));
 
 // ==== Router ====
 const UsersRouter = require("./routes/Users.Route");
+const AnimalRouter = require("./routes/Animal.Route");
 
 app.use("/user", UsersRouter);
+app.use("/animal", AnimalRouter);
 
 const httpServer = createServer(app);
 httpServer.listen(process.env.PORT, () => {

@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const connections = require("../Configs/database");
 
-const animals = connections.define("", {
+const Animal = connections.define("Animal", {
   id: {
     type: DataTypes.BIGINT,
     autoIncrement: true,
@@ -9,6 +9,7 @@ const animals = connections.define("", {
   },
   nameAnimal: { type: DataTypes.STRING },
   species: { type: DataTypes.STRING },
+  typeof: { type: DataTypes.STRING },
   showDuration: { type: DataTypes.TIME },
   isActive: {
     type: DataTypes.BOOLEAN,
@@ -17,6 +18,6 @@ const animals = connections.define("", {
   },
 });
 
-// animals.sync({ alter: true });
+// Animal.sync({ alter: true });
 
-module.exports = animals;
+module.exports = Animal;

@@ -1,13 +1,13 @@
-const animalModel = require("./animal");
-const performanceStagesModel = require("./performance_stages");
-const roundShowModel = require("./round_show");
-const usersModel = require("./users");
+const AnimalModel = require("./animal");
+const PerformanceStagesModel = require("./PerformanceStages");
+const RoundShowModel = require("./RoundShow");
+const UsersModel = require("./Users");
 
-const model = {
-  animal: animalModel,
-  performancestages: performanceStagesModel,
-  roundshow: roundShowModel,
-  users: usersModel,
+const Model = {
+  Animal: AnimalModel,
+  Performancestages: PerformanceStagesModel,
+  Roundshow: RoundShowModel,
+  Users: UsersModel,
 };
 
-module.exports = model;
+module.exports = Model;

@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const connection = require("../configs/database");
 
-const users = connection.define("User", {
+const Users = connection.define("Users", {
   id: {
     type: DataTypes.BIGINT,
     autoIncrement: true,
@@ -28,6 +28,6 @@ const users = connection.define("User", {
   },
 });
 
-// users.sync({ alter: true });
+// Users.sync({ alter: true });
 
-module.exports = users;
+module.exports = Users;

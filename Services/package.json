@@ -1,7 +1,7 @@
 {
   "name": "services",
   "version": "1.0.0",
-  "description": "",
+  "description": "Workshop ",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",

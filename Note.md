@@ -27,3 +27,5 @@ Deliverables
 -  Mobile application or Web application
 - ER diagram
 - APIs
+
+Name Folders => Lowercase , Name File => camelCase

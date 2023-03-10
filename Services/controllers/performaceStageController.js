@@ -1,4 +1,4 @@
-const model = require("../models/model");
+const model = require("../models/Model");
 const { Op } = require("sequelize");
 const PerformaceStageController = {};
 

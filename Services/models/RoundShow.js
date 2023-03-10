@@ -1,15 +1,16 @@
 const { DataTypes } = require("sequelize");
 const connections = require("../Configs/database");
 
-const performancestages = connections.define("performancestages", {
+const Roundshows = connections.define("Roundshows", {
   id: {
     type: DataTypes.BIGINT,
     autoIncrement: true,
     primaryKey: true,
   },
-  roomNumber: { type: DataTypes.STRING(2) },
-  sumSeat: { type: DataTypes.STRING(4) },
-  price: { type: DataTypes.STRING(4) },
+  roomNo: { type: DataTypes.STRING },
+  nameAnimal: { type: DataTypes.STRING },
+  timeShow: { type: DataTypes.DATE },
+  roomNo: { type: DataTypes.STRING },
   isActive: {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
@@ -17,6 +18,6 @@ const performancestages = connections.define("performancestages", {
   },
 });
 
-// performancestages.sync({ alter: true });
+// Roundshows.sync({ alter: true });
 
-module.exports = performancestages;
+module.exports = Roundshows;

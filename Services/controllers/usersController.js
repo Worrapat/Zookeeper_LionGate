@@ -1,10 +1,10 @@
-const model = require("../models/model");
+const model = require("../models/Model");
 const { Op } = require("sequelize");
 const UsersController = {};
 
 UsersController.getAllUsers = async function (req, res) {
   try {
-    const userData = await model.users.findAll();
+    const userData = await model.Users.findAll();
     if (userData.length > 0) {
       res
         .status(200)
@@ -21,7 +21,7 @@ UsersController.getAllUsers = async function (req, res) {
 
 UsersController.getUsersById = async function (req, res) {
   try {
-    const userData = await model.users.findOne({
+    const userData = await model.Users.findOne({
       where: { id: { [Op.like]: [req.params.id] } },
     });
     if (userData.length > 0) {
@@ -38,11 +38,12 @@ UsersController.getUsersById = async function (req, res) {
 
 UsersController.createUsers = async function (req, res) {
   try {
-    const checkData = await model.users.findAll({
+    const checkData = await model.Users.findAll({
       where: {
         [Op.or]: {
           username: req.body.username,
           password: req.body.password,
+          userType: req.body.userType,
         },
       },
     });
@@ -51,22 +52,22 @@ UsersController.createUsers = async function (req, res) {
         .status(500)
         .json({ message: "Username/password has already in use." });
     } else {
-      await model.users
-        .create({
-          username: req.body.username,
-          password: req.body.password,
-          token: req.body.username + req.body.password,
-        })
-        .then((result) => {
-          res.status(201).json({
-            message: "user successful created",
-            data: {
-              username: req.body.username,
-              password: req.body.password,
-              token: req.body.username + req.body.password,
-            },
-          });
+      await model.Users.create({
+        username: req.body.username,
+        password: req.body.password,
+        userType: req.body.userType,
+        token: req.body.username + req.body.password,
+      }).then((result) => {
+        res.status(201).json({
+          message: "user successful created",
+          data: {
+            username: req.body.username,
+            password: req.body.password,
+            userType: req.body.userType,
+            token: req.body.username + req.body.password,
+          },
         });
+      });
     }
   } catch (error) {
     res.status(404).json({ message: error });
@@ -75,14 +76,14 @@ UsersController.createUsers = async function (req, res) {
 
 UsersController.updateUsers = async function (req, res) {
   try {
-    await model.users
-      .findAll({ where: { id: req.body.id } })
-      .then(async (result) => {
+    await model.Users.findAll({ where: { id: req.body.id } }).then(
+      async (result) => {
         if (result.length > 0) {
-          await model.users.update(
+          await model.Users.update(
             {
               username: req.body.username,
               password: req.body.password,
+              userType: req.body.userType,
               token: req.body.username + req.body.password,
             },
             { where: { id: req.body.id } }
@@ -93,13 +94,15 @@ UsersController.updateUsers = async function (req, res) {
               id: req.body.id,
               username: req.body.username,
               password: req.body.password,
+              userType: req.body.userType,
               token: req.body.username + req.body.password,
             },
           });
         } else {
           res.status(500).json({ message: "Update failed" });
         }
-      });
+      }
+    );
   } catch (error) {
     res.status(404).json({ message: error });
   }
@@ -107,16 +110,16 @@ UsersController.updateUsers = async function (req, res) {
 
 UsersController.deleteUsers = async function (req, res) {
   try {
-    await model.users
-      .findAll({ where: { id: req.body.id } })
-      .then(async (result) => {
+    await model.Users.findAll({ where: { id: req.body.id } }).then(
+      async (result) => {
         if (result.length > 0) {
-          await model.users.destroy({ where: { id: req.body.id } });
+          await model.Users.destroy({ where: { id: req.body.id } });
           res.status(200).json({ message: "Delete user successfully." });
         } else {
           res.status(404).json({ message: "id user not found." });
         }
-      });
+      }
+    );
   } catch (error) {
     res.status(404).json({ message: error });
   }
